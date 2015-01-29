@@ -39,6 +39,14 @@ imagemagick = (reader, writer, width, quality) ->
 
   convert.stderr.pipe process.stdout
 
+sharp = require 'sharp'
+
+sharp_tranform = (reader, writer, width, quality) ->
+  transformer = sharp().resize(+width).quality(quality)
+
+  reader.pipe(transformer).pipe writer
+
 module.exports = exports =
   mozjpeg: mozjpeg
   imagemagick: imagemagick
+  sharp: sharp_tranform

@@ -26,6 +26,7 @@
   "homepage": "https://github.com/jbgutierrez/node-resizer-server",
   "dependencies": {
     "coffee-script": "^1.8.0",
-    "request": "^2.51.0"
+    "request": "^2.51.0",
+    "sharp": "^0.9.0"
   }
 }
