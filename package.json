@@ -23,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/jbgutierrez/node-resizer-server/issues"
   },
-  "homepage": "https://github.com/jbgutierrez/node-resizer-server"
+  "homepage": "https://github.com/jbgutierrez/node-resizer-server",
+  "dependencies": {
+    "coffee-script": "^1.8.0",
+    "request": "^2.51.0"
+  }
 }
