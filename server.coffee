@@ -29,6 +29,6 @@ dispatcher = (req, res) ->
   reader = request.get(options.url).on 'error', (err) -> console.log(err)
   reader.on 'error', -> send_not_found res
   reader.on 'response', -> send_ok res
-  resize.mozjpeg reader, res, options.width || 1024, options.quality || 70
+  resize.imagemagick reader, res, options.width || 1024, options.quality || 70
 
 (http.createServer dispatcher).listen process.env.PORT || 8080

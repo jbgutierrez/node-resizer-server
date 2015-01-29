@@ -41,4 +41,4 @@ imagemagick = (reader, writer, width, quality) ->
 
 module.exports = exports =
   mozjpeg: mozjpeg
-  convert: imagemagick
+  imagemagick: imagemagick
