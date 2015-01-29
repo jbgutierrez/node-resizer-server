@@ -1,0 +1,27 @@
+{
+  "name": "node-resizer-server",
+  "version": "0.0.0",
+  "description": "Dynamic image resizing server for Node.js",
+  "main": "coffee server.coffee",
+  "directories": {
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jbgutierrez/node-resizer-server.git"
+  },
+  "keywords": [
+    "imagemagick",
+    "images"
+  ],
+  "author": "Javier Blanco <http://jbgutierrez.info>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jbgutierrez/node-resizer-server/issues"
+  },
+  "homepage": "https://github.com/jbgutierrez/node-resizer-server"
+}

@@ -1,0 +1,3 @@
+let g:js_css_compress_disabled = 1
+function! JsCssCompress()
+endfunction
