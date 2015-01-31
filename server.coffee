@@ -7,16 +7,13 @@ URL     = require 'url'
 resize  = require './stream-resizer'
 
 send_ok = (res) ->
-  console.log "OK"
   res.writeHead 200, "Content-Type": "image/jpeg"
 
 send_not_found = (res) ->
-  console.log "404"
   res.writeHead 404
   res.end()
 
 send_error = (res) ->
-  console.log "500"
   res.writeHead 500
   res.end()
 
