@@ -1,6 +1,6 @@
 child_process = require 'child_process'
 
-mozjpeg = (reader, writer, width, quality) ->
+mozjpeg = (reader, writer, width, quality, error) ->
   args = [
     'jpg:-'
     '-resize', width
@@ -9,22 +9,24 @@ mozjpeg = (reader, writer, width, quality) ->
   ]
 
   convert = child_process.spawn 'convert', args
+  convert.on 'error', error
 
   args = [
     '-optimize'
     '-dct', 'float'
     '-quality', quality
   ]
-  cjpeg = child_process.spawn 'cjpeg', args
+  cjpeg = child_process.spawn 'jpeg', args
+  cjpeg.on 'error', error
 
   reader.pipe convert.stdin
   convert.stdout.pipe cjpeg.stdin
   cjpeg.stdout.pipe writer
 
-  convert.stderr.pipe process.stdout
-  cjpeg.stderr.pipe process.stdout
+  convert.stderr.pipe writer
+  cjpeg.stderr.pipe writer
 
-imagemagick = (reader, writer, width, quality) ->
+imagemagick = (reader, writer, width, quality, error) ->
   args = [
     'jpg:-'
     '-resize', width
@@ -33,16 +35,18 @@ imagemagick = (reader, writer, width, quality) ->
   ]
 
   convert = child_process.spawn 'convert', args
+  convert.on 'error', error
 
   reader.pipe convert.stdin
   convert.stdout.pipe writer
 
-  convert.stderr.pipe process.stdout
+  convert.stderr.pipe writer
 
 sharp = require 'sharp'
 
-sharp_tranform = (reader, writer, width, quality) ->
+sharp_tranform = (reader, writer, width, quality, error) ->
   transformer = sharp().resize(+width).quality(quality)
+  transformer.on 'error', error
 
   reader.pipe(transformer).pipe writer
 

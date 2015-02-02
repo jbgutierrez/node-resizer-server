@@ -31,7 +31,9 @@ dispatcher = (req, res) ->
 
   reader = request.get(url).on 'error', (err) -> console.log(err)
   reader.on 'error', -> send_not_found res
+  res.on 'error', -> send_not_found res
   reader.on 'response', -> send_ok res
-  tool reader, res, width, quality
+
+  tool reader, res, width, quality, -> send_error res
 
 (http.createServer dispatcher).listen process.env.PORT || 8080
