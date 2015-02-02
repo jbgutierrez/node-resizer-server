@@ -17,7 +17,19 @@ send_error = (res) ->
   res.writeHead 500
   res.end()
 
+send_forbidden = (res) ->
+  res.writeHead 403
+  res.end()
+
+valid_referers = if process.env.VALID_REFERERS then process.env.VALID_REFERERS.split ':' else []
+
 dispatcher = (req, res) ->
+  if valid_referers.length
+    referer = URL.parse req.headers['referer'] || ''
+    if !~valid_referers.indexOf referer.hostname
+      send_forbidden res
+      return
+
   query = (URL.parse req.url, true).query
 
   url     = query.url
