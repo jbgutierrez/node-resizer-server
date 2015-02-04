@@ -1,5 +1,4 @@
 #!/usr/bin/env coffee
-
 http    = require 'http'
 fs      = require 'fs'
 request = require 'request'
@@ -36,13 +35,20 @@ dispatcher = (req, res) ->
   tool    = resize[query.tool || "imagemagick"]
   width   = 1024 unless (width = +query.width) and 0 < width < 2880
   quality = 70 unless (quality = +query.quality) and 0 < quality < 100
+  path    = query.path
 
-  unless tool and url
+  unless tool and (url or path)
     send_not_found res
     return
 
-  reader = request.get(url).on 'error', (err) -> console.log(err)
-  reader.on 'error', -> send_not_found res
+  reader = if url
+    request.get url
+  else
+    fs.createReadStream path
+
+  reader.on 'error', (err) ->
+    console.log err
+    send_not_found res
   res.on 'error', -> send_not_found res
   reader.on 'response', -> send_ok res
 
